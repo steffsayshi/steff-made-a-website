@@ -33,24 +33,25 @@
 <a href="../../Documents/My%20Web%20Sites/enroll.html" target="_blank">
 <span class="auto-style3">Enroll</span></a></p>
 <div id="sheet-data"></div>
-
 <script>
-fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSVp8vj2MEUeFobVJwLk_qu1kch7v8OW1czoSCr6cB7sJyNVI68MSv4p42zYTg6MYGu_q2woLnyAv5-/pub?output=csv
-')
-  .then(response => response.text())
-  .then(csv => {
-    let rows = csv.split("\n").map(r => r.split(","));
-    let html = "<table border='1' cellpadding='5'>";
-    rows.forEach(row => {
-      html += "<tr>";
-      row.forEach(cell => html += `<td>${cell}</td>`);
-      html += "</tr>";
-    });
-    html += "</table>";
-    document.getElementById("sheet-data").innerHTML = html;
-  })
-  .catch(err => console.error("Error loading Google Sheet:", err));
+  fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSVp8vj2MEUeFobVJwLk_qu1kch7v8OW1czoSCr6cB7sJyNVI68MSv4p42zYTg6MYGu_q2woLnyAv5-/pub?output=csv')
+    .then(response => response.text())
+    .then(csv => {
+      const rows = csv.trim().split('\n').map(r => r.split(','));
+      let html = '<table border="1" cellpadding="5" style="border-collapse: collapse;">';
+      rows.forEach((row, i) => {
+        html += '<tr>' + row.map(cell =>
+          i === 0
+            ? `<th style="background:#f0f0f0;">${cell}</th>`
+            : `<td>${cell}</td>`
+        ).join('') + '</tr>';
+      });
+      html += '</table>';
+      document.getElementById('sheet-data').innerHTML = html;
+    })
+    .catch(error => console.error('Error loading Google Sheet:', error));
 </script>
+
 
 <table style="width: 100%">
 	<tr>
@@ -117,3 +118,4 @@ fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSVp8vj2MEUeFobVJwLk_qu1k
 </body>
 
 </html>
+
