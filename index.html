@@ -3,59 +3,42 @@
 <head>
 <meta charset="utf-8" />
 <title>About us</title>
-<style type="text/css">
-  .auto-style2 {
-    text-align: center;
-    text-decoration: underline;
-  }
-  .auto-style1 {
-    text-align: center;
-  }
-  .auto-style3 {
-    color: #000000;
-  }
-  table {
-    border-collapse: collapse;
-  }
-  table, th, td {
-    border: 1px solid black;
-  }
-  th {
-    background: #f0f0f0;
-  }
+<style>
+  .auto-style2 { text-align: center; text-decoration: underline; }
+  .auto-style1 { text-align: center; }
+  .auto-style3 { color: #000000; }
+  table { border-collapse: collapse; margin: auto; }
+  th, td { border: 1px solid black; padding: 8px; }
+  th { background: #f0f0f0; }
 </style>
 </head>
 
 <body bgcolor="#FFFFCC">
 
 <p>
-  <!-- Replaced local path with an online placeholder -->
   <img alt="School Banner" height="327" src="https://via.placeholder.com/1200x327?text=Top+School" width="100%" />
 </p>
 
 <h1 class="auto-style2">University of Cambridge</h1>
 
 <p class="auto-style1">
-  <a href="#" target="_blank"><span class="auto-style3">Home</span></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#" target="_blank"><span class="auto-style3">About us</span></a>&nbsp;&nbsp;|&nbsp;&nbsp;
-  <a href="#" target="_blank"><span class="auto-style3">Enroll</span></a>
+  <a href="#"><span class="auto-style3">Home</span></a> |
+  <a href="#"><span class="auto-style3">About us</span></a> |
+  <a href="#"><span class="auto-style3">Enroll</span></a>
 </p>
 
-<!-- Google Sheets data will appear here -->
 <h2 class="auto-style1">Live Data from Google Sheets</h2>
-<div id="sheet-data" style="margin: 20px auto; width: 80%;"></div>
+<div id="sheet-data" style="margin-bottom: 30px;"></div>
 
 <script>
 fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSVp8vj2MEUeFobVJwLk_qu1kch7v8OW1czoSCr6cB7sJyNVI68MSv4p42zYTg6MYGu_q2woLnyAv5-/pub?output=csv')
   .then(response => response.text())
   .then(csv => {
     const rows = csv.trim().split(/\r?\n/).map(r => r.split(','));
-    let html = '<table cellpadding="5" style="margin:auto;">';
+    let html = '<table>';
     rows.forEach((row, i) => {
       html += '<tr>' + row.map(cell =>
-        i === 0
-          ? `<th>${cell}</th>`
-          : `<td>${cell}</td>`
+        i === 0 ? `<th>${cell}</th>` : `<td>${cell}</td>`
       ).join('') + '</tr>';
     });
     html += '</table>';
@@ -67,21 +50,18 @@ fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSVp8vj2MEUeFobVJwLk_qu1k
 <table style="width: 100%">
   <tr>
     <td style="width: 124px">
-      <!-- Replaced with placeholder image -->
       <img alt="Secondary Logo" height="250" src="https://via.placeholder.com/250x250?text=Logo" width="250" />
     </td>
     <td>
       The Cambridge logo is a seal of approval and a promise of excellence...
-      (Your original text continues here)
     </td>
   </tr>
   <tr>
     <td style="width: 124px">
-      <!-- Replaced with placeholder sports logo -->
       <img alt="Sports Logo" height="250" src="https://via.placeholder.com/250x250?text=Sports+Logo" width="250" />
     </td>
     <td>
-      (Your sports description text continues here)
+      Although the Sports Centre provides a hub for Sport at Cambridge University...
     </td>
   </tr>
 </table>
