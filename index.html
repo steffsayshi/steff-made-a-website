@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
@@ -32,6 +32,25 @@
 </span>
 <a href="../../Documents/My%20Web%20Sites/enroll.html" target="_blank">
 <span class="auto-style3">Enroll</span></a></p>
+<div id="sheet-data"></div>
+
+<script>
+fetch('https://docs.google.com/spreadsheets/d/e/2PACX-1vSVp8vj2MEUeFobVJwLk_qu1kch7v8OW1czoSCr6cB7sJyNVI68MSv4p42zYTg6MYGu_q2woLnyAv5-/pub?output=csv
+')
+  .then(response => response.text())
+  .then(csv => {
+    let rows = csv.split("\n").map(r => r.split(","));
+    let html = "<table border='1' cellpadding='5'>";
+    rows.forEach(row => {
+      html += "<tr>";
+      row.forEach(cell => html += `<td>${cell}</td>`);
+      html += "</tr>";
+    });
+    html += "</table>";
+    document.getElementById("sheet-data").innerHTML = html;
+  })
+  .catch(err => console.error("Error loading Google Sheet:", err));
+</script>
 
 <table style="width: 100%">
 	<tr>
